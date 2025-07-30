@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>library</title>
+</head>
+<body>
+    책 리스트 페이지 입니다.
+    {% for book in books %}
+        <h1>{{ book }}</h1>
+
+        <h3><a href="{{ book.get_absolute_url }}">제목:{{ book.title }}</a></h3>
+        <h3>저자:{{ book.author }}</h3>
+        <hr>
+    {% endfor %}
+
+</body>
+</html>
