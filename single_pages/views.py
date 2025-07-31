@@ -10,3 +10,8 @@ def landing(request):
                   context={'title':'Landing',
                            'name':'홍길동'}
                   )
+def about(request):
+    return render(request,
+                  template_name='single_pages/about_me.html',
+                  context={'title':'About',}
+                  )
