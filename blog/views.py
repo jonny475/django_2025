@@ -3,16 +3,26 @@ from fileinput import filename
 
 from django.http import FileResponse
 from django.shortcuts import render, redirect
+# from django.views.generic import ListView, DetailView
 
 from .forms import PostForm
 from .models import Post, Category
 from django.conf import settings
 
+#CBV
+# #class PostListView(ListView):
+#     model = Post
+#     context_object_name = 'posts'
+#
+# class DetailPostView(DetailView):
+#     model = Post
+#     context_object_name = 'post'
+
 # 함수생성
 def index(request):
     #db에서 query - select * from post
     posts = Post.objects.all().order_by('-pk')
-    categories = Category.objects.all().order_by('-pk')
+    categories = Category.objects.all()
     return render(request, 'blog/index.html',
                   context={'posts': posts,
                             'categories':categories
@@ -21,14 +31,18 @@ def index(request):
 
 
 def category(request, slug):
-    categories = Category.objects.all()   #category list 다 줘
-    category = Category.objects.get(slug=slug)
-    posts = Post.objects.filter(category=category)
+    categories = Category.objects.all()  # category list 다 줘
+    if slug == 'no_category':            #미분류인경우
+        posts = Post.objects.filter(category=None)
+    else:                                # 카테고리가 있는 경우
+        category = Category.objects.get(slug=slug)
+        posts = Post.objects.filter(category=category)
+
     return render(request, template_name='blog/index.html',
-                   context={'posts': posts,
-                            'categories':categories
-                             }
-                  )
+                       context={'posts': posts,
+                                'categories':categories
+                                 }
+                      )
 
 def detail(request, pk):
     post111 = Post.objects.get(pk=pk)

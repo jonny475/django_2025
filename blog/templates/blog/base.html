@@ -43,8 +43,9 @@
                     <div class="card-body">
                         <ul class="list-unstyled mb-0">
                             {% for category in categories %}
-                            <li><a href={{ category.get_url}}>{{ category.name }}</a></li>
+                                <li><a href={{ category.get_url}}>{{ category.name }}</a></li>
                             {% endfor %}
+                                 <li><a href="/blog/category/no_category">미분류</a></li>
                         </ul>
                     </div>
                 </div>
