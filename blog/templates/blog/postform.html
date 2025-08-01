@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+    {% block title %}
+        <title>write</title>
+    {% endblock %}
+{% block main-area %}
+<body>
+    postform페이지 입니다.
+    글 쓰는 화면 입니다.
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}   <!--보안 cross site request forgery -->
+        {{ postform }}
+        <input type="submit">
+    </form>
+</body>
+{% endblock %}
+
+{% block header_name %}
+    <header class="py-5 bg-light border-bottom mb-4">
+    <div class="container">
+        <div class="text-center my-5">
+            <h1 class="fw-bolder">글쓰기 페이지 </h1>
+        </div>
+    </div>
+    </header>
+{% endblock %}
